@@ -5,8 +5,8 @@ let promise = new Promise((resolve,reject) => {
     setTimeout(() => {
         resolve("Promise Resolved!")
     },1000ms)
-}).then((value) => {
-    console.log(value);
+}).then((promise) => {
+    console.log(promise);
 })
 ```
 
@@ -15,9 +15,8 @@ let promise = new Promise((resolve,reject) => {
 ```js
 let promise2 = new Promise((resolve,reject) => {
     reject(`Rejected Promise`)
-}).catch(() => {
-    console.log(value);
 })
+promise2.catch(console.log);
 ```
 
 3. Create another promise. Now have it reject with a value of `Rejected Promise!` without using `setTimeout`. Print the contents of the promise after it has been rejected by passing console.log to `.catch` and also use `.finally` to log message `Promise Settled!`.
@@ -25,11 +24,8 @@ let promise2 = new Promise((resolve,reject) => {
 ```js
 let pr = new Promise((resolve,reject) => {
     reject(`Rejected Promise`)
-}).catch((value) => {
-
-}).finally(() => {
-    console.log(`Promise Settled `);
 })
+pr.catch(console.log).finally(() => console.log('Promise Settled'));
 ```
 
 4. What will be the output of the code below.
@@ -54,7 +50,9 @@ A , D , C, B
 ```
 function wait(time){
  return new Promise((resolve,reject) => {
-     setTimeout(res,5000ms)
+     setTimeout(() => {
+         res();
+     }, time)
  })
 }
 
@@ -68,9 +66,15 @@ function wait(time){
 - Catch the error using `.catch`
 
 ```js
-let promise6 = new Promise((resove,reject) => {
+let promise = new Promise((resolve,reject) => {
     resolve(21)
-}).then((value) => return value + 10;).then(())
+})
+promise.then((value) => value + 10)
+}).then((value) => value + 100)}).then((value) => if(value) > 100){
+    console.error(error);
+}.catch((error) => {
+
+})
 ```
 
 7. Do the following:
@@ -82,7 +86,18 @@ let promise6 = new Promise((resove,reject) => {
 - Use `.then` and log the value
 
 ```js
-// Your code
+let promise = new Promise((resolve,reject) => {
+    resolve(`['A']`)
+}).then((value) => {
+    return value.concat('B');
+}).then((value) => {
+    return value.reduce((acc,cv,i) => {
+        acc[i] = cv;
+        return acc;
+    })
+}).then((value) => {
+    console.log(value);
+})
 ```
 
 8. Do the following:
@@ -95,7 +110,13 @@ let promise6 = new Promise((resove,reject) => {
 ```js
 let first = new Promise((resolve,reject) => {
     resolve(1)
-}).then((value) => resolve(2) )
+}).then((value) => {
+    return 2
+}).then((value) => {
+    return 3
+}).then((value) => {
+    return 3
+})
 ```
 
 9. Do the following:
@@ -106,7 +127,21 @@ let first = new Promise((resolve,reject) => {
 - Use `.then` on `first` and return `4` also check the value you get access to by logging
 
 ```js
-// Your code
+let first = new Promise((resolve,reject) => {
+    resolve(1)
+})
+first.then((value) => {
+    console.log(value);
+    return 2;
+})
+first.then((value) => {
+    console.log(value);
+    return 3;
+})
+first.then((value) => {
+    console.log(value);
+    return 4;
+})
 ```
 
 10. Try to understand the difference between the problem 8 and 9. Write your observation.
@@ -119,7 +154,13 @@ let first = new Promise((resolve,reject) => {
 - Use `.then` to log the value
 
 ```js
-let John = new Promise((resove,reject) => {
-    resolve(`John`)
-}).then(() => return resolve(`Arya`)).then(setTimeout => ()
+let John = new Promise((resolve,reject) => {
+    resolve(`John`);
+}).then((value) => {
+    reurn Promise.resolve(`Arya`);
+}).then((value) => {
+    setTimeout(() => {
+        resolve(`Bran`)
+;    },2000)
+}).then(console.log)
 ```
