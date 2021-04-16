@@ -1,0 +1,10 @@
+header{
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    font-size: 2rem;
+}
+.news_select{
+    margin: 0 auto;
+}
