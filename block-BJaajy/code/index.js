@@ -1,28 +1,32 @@
-let promise = new Promise((resolve,reject) => {
-    setTimeout((val) => {
-        resolve(9);
-    },1000)
-}).then((value) => {
-    setTimeout(() => {
-        resolve(10);
-    },2000)
-}).then((value) => {
-    setTimeout(() => {
-        resolve(11)
-    },3000)
-}).then((value) => {
-    setTimeout(() => {
-        resolve(12)
-    },4000)
+let times = [1,2,3,4];
+let timesPromise = times.map(second => new Promise((res) => {
+    setTimeout(() => res(Math.random(), second * 1000))
 })
+);
 
+Promise.all(timesPromise).then(console.log);
+
+Promise.all(ti)
 const gitUser = ['akshay','akash','siddharth','shubham','narendra'];
-const gitUserData = Promise.all(gitUser.map(user) => {
-    fetch(`https:\\www.github.com\user\getify`)
-    .then((res) => res.json)
-    .then((value) => console.log(value))'
-})
+const usersPromises = gitUser.map((user) => {
+   return fetch(`https:\\www.github.com\`${user}`)
+    .then((res) => res.json()
 
-fetch( `https://random.dog/woof.json`)
-.then((resolve) => resolve.json())
-.then((value) => console.log(value))
+    );
+});
+
+Promise.all(usersPromises).then(users => {
+    users.forEach(user => console.log(user.followers));
+});
+
+
+let promiseOne = fetch( `https://random.dog/woof.json`)
+.then((resolve) => resolve.json());
+
+let promiseTwo = fetch(`https://aws.random.cat/meow`)
+.then((resolve) => resolve.json());
+
+Promise.race([promiseOne, promiseTwo]).then(console.log);
+
+Promise.allSettled([one,two,three]).then(console.log);
+Promise.all([one, two, tree]).then(console.log);
